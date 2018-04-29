@@ -17,6 +17,6 @@ add_compile_options(-std=c++17 -Wall -Wextra -Wpedantic -Werror)
 
 include_directories(inc)
 
-add_library(darbow STATIC inc/CompilationTask.hpp src/ReadSourceCompilationTask.cc inc/ReadSourceCompilationTask.hpp)
+add_library(darbow STATIC inc/CompilationTask.hpp inc/PipelineCompilationTask.hpp src/ReadSourceCompilationTask.cc inc/ReadSourceCompilationTask.hpp)
 
 add_subdirectory(test)
