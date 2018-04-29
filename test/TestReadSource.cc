@@ -5,10 +5,9 @@
 
 #include <iostream>
 
-class OutputCompilationTask : public darbow::CompilationTask<std::string, int> {
+class OutputCompilation : public darbow::CompilationFinisher<std::string> {
 public:
-    std::error_condition Run(const std::string &source, int *dummy) const override {
-        *dummy = 0;
+    std::error_condition Run(const std::string &source) const override {
         std::cout << source;
         return {};
     }
@@ -17,10 +16,9 @@ public:
 int main(int argc, char **argv) {
     for (auto i = 1; i < argc; ++i) {
         std::string filename = argv[i];
-        int dummy;
 
-        auto err = darbow::run_pipeline(filename, &dummy, darbow::ReadSourceCompilationTask(),
-                                        OutputCompilationTask());
+        auto err = darbow::run_pipeline(filename, darbow::ReadSourceCompilationTask(),
+                                        OutputCompilation());
 
         if (err) {
             std::cerr << "Error: " << err.message() << std::endl;
