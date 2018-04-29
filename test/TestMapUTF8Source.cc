@@ -2,10 +2,10 @@
 
 #include "task/CompilationTask.hpp"
 #include "task/PipelineCompilationTask.hpp"
+#include "task/MapUTF8SourceTask.hpp"
 #include "task/ReadSourceCompilationTask.hpp"
 
 #include <iostream>
-
 
 int main(int argc, char **argv) {
     for (auto i = 1; i < argc; ++i) {
@@ -13,7 +13,8 @@ int main(int argc, char **argv) {
         std::string source;
 
         auto pipeline = darbow::make_pipeline(
-            darbow::ReadSourceCompilationTask()
+            darbow::ReadSourceCompilationTask(),
+            darbow::MapUTF8SourceTask()
         );
 
         auto err = pipeline.Run(filename, &source);

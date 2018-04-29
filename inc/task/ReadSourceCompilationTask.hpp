@@ -2,7 +2,7 @@
 
 // Copyright 2018 oneup
 
-#include "CompilationTask.hpp"
+#include "task/CompilationTask.hpp"
 
 #include <memory>
 #include <string>
