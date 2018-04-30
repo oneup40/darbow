@@ -17,6 +17,8 @@ namespace {
  * A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
  * 0 1 2 3 4 5 6 7 8 9
  * _ { } [ ] # ( ) < > % : ; . ? * + - / ^ & | ~ ! = , \ " ’
+ *
+ * [lex.charset], para 1
  */
 
 constexpr const std::array<bool, 128> is_ascii_basic = {
@@ -74,6 +76,8 @@ std::error_condition MapUTF8SourceTask::Run(const std::string &input, std::strin
      * and the same extended character expressed in the source file as a universal-character-name
      * (e.g., using the \uXXXX notation), are handled equivalently except where this replacement is
      * reverted (5.4) in a raw string literal.
+     *
+     * [lex.phases], para 1
      */
 
     std::size_t index = 0;
@@ -87,30 +91,31 @@ std::error_condition MapUTF8SourceTask::Run(const std::string &input, std::strin
             if (c >= 0x80) {
                 unsigned nchars = 0;
 
-                while (c & 0x80u) {
-                    ++nchars;
-                    c <<= 1;
-                }
-
-                --nchars;
-
-                if (!nchars || index + nchars >= input.size()) {
+                if ((c & 0xE0u) == 0xC0u) {
+                    nchars = 1;
+                    c &= 0x1Fu;
+                } else if ((c & 0xF0u) == 0xE0u) {
+                    nchars = 2;
+                    c &= 0x0Fu;
+                } else if ((c & 0xF8u) == 0xF0u) {
+                    nchars = 3;
+                    c &= 0x07u;
+                } else {
                     return UnicodeError::InvalidUTF8Sequence;
                 }
 
-                c >>= nchars;
-                for (auto i = 0u; i < nchars; ++i) {
-                    c <<= 6;
-                    c |= static_cast<unsigned char>(input[index + i]) & 0x3fu;
+                if (index + nchars > input.size()) {
+                    return UnicodeError::InvalidUTF8Sequence;
                 }
 
-                index += nchars;
+                for (auto i = 0u; i < nchars; ++i) {
+                    c <<= 6;
+                    c |= static_cast<unsigned char>(input[index++]) & 0x3Fu;
+                }
             }
 
             (*output) += make_universal(c);
         }
-
-        ++index;
     }
 
     return {};
