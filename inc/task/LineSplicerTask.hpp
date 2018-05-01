@@ -6,7 +6,7 @@
 
 namespace darbow {
 
-class LineUnsplicerTask : public CompilationTask<std::string, std::string> {
+class LineSplicerTask : public CompilationTask<std::string, std::string> {
 public:
     std::error_condition Run(const std::string &input, std::string *output) const;
 };

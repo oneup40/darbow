@@ -1,7 +1,7 @@
 // Copyright 2018 oneup
 
 #include "task/CompilationTask.hpp"
-#include "task/LineUnsplicerTask.hpp"
+#include "task/LineSplicerTask.hpp"
 #include "task/MapUTF8SourceTask.hpp"
 #include "task/PipelineCompilationTask.hpp"
 #include "task/ReadSourceCompilationTask.hpp"
@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
         auto pipeline = darbow::make_pipeline(
             darbow::ReadSourceCompilationTask(),
             darbow::MapUTF8SourceTask(),
-            darbow::LineUnsplicerTask()
+            darbow::LineSplicerTask()
         );
 
         auto err = pipeline.Run(filename, &source);

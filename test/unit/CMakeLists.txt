@@ -1,2 +1,2 @@
-add_executable(test-units TestUnits.cc TestMapUTF8.cc TestLineUnsplicer.cc)
+add_executable(test-units TestUnits.cc TestMapUTF8.cc TestLineSplicer.cc)
 target_link_libraries(test-units darbow)

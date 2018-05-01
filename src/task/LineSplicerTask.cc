@@ -1,10 +1,10 @@
 // Copyright 2018 oneup
 
-#include "task/LineUnsplicerTask.hpp"
+#include "task/LineSplicerTask.hpp"
 
 namespace darbow {
 
-std::error_condition LineUnsplicerTask::Run(const std::string &input, std::string *output) const {
+std::error_condition LineSplicerTask::Run(const std::string &input, std::string *output) const {
     /* 2. Each instance of a backslash character (\) immediately followed by a new-line character is
      * deleted, splicing physical source lines to form logical source lines. Only the last backslash
      * on any physical source line shall be eligible for being part of such a splice. Except for

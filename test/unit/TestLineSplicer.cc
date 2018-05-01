@@ -3,7 +3,7 @@
 #include "catch.hpp"
 
 #include "error/UnicodeError.hpp"
-#include "task/LineUnsplicerTask.hpp"
+#include "task/LineSplicerTask.hpp"
 
 using namespace darbow;
 
@@ -19,8 +19,8 @@ using namespace darbow;
  * [lex.phases], para 1
  */
 
-TEST_CASE("Unsplice lines", "[line-unsplicer]") {
-    LineUnsplicerTask task;
+TEST_CASE("Splice lines", "[line-splicer]") {
+    LineSplicerTask task;
     std::string output;
 
     SECTION("Basic no spliced lines") {
