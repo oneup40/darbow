@@ -32,10 +32,7 @@ public:
     }
 };
 
-static inline const UnicodeErrorCategory &unicode_error_category() {
-    static UnicodeErrorCategory uec;
-    return uec;
-}
+const UnicodeErrorCategory &unicode_error_category();
 
 static inline std::error_condition make_error_condition(UnicodeError e) {
     return {static_cast<int>(e), unicode_error_category()};

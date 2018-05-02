@@ -22,6 +22,6 @@ endif ()
 
 include_directories(inc)
 
-add_library(darbow STATIC inc/task/CompilationTask.hpp inc/task/PipelineCompilationTask.hpp src/task/ReadSourceCompilationTask.cc inc/task/ReadSourceCompilationTask.hpp src/task/MapUTF8SourceTask.cc inc/task/MapUTF8SourceTask.hpp inc/error/UnicodeError.hpp inc/task/LineSplicerTask.hpp src/task/LineSplicerTask.cc)
+add_library(darbow STATIC inc/task/CompilationTask.hpp inc/task/PipelineCompilationTask.hpp src/task/ReadSourceCompilationTask.cc inc/task/ReadSourceCompilationTask.hpp src/task/MapUTF8SourceTask.cc inc/task/MapUTF8SourceTask.hpp inc/error/UnicodeError.hpp inc/task/LineSplicerTask.hpp src/task/LineSplicerTask.cc src/task/CommentReplacerTask.cc inc/task/CommentReplacerTask.hpp src/error/ParserError.cc inc/error/ParserError.hpp src/error/UnicodeError.cc)
 
 add_subdirectory(test)
